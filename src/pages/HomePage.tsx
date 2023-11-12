@@ -23,7 +23,7 @@ const HomePage = () => {
             quo incidunt aperiam! Accusamus quaerat laborum eum nemo numquam,
             sequi qui incidunt. Rerum!
           </Typography>
-          <Link to="/app" className="bg-green-500 rounded w-[200px] mt-5">
+          <Link to="/app" className="bg-green-500 rounded w-[200px] mt-5 h-[50px] flex justify-center items-center">
             <Typography className="text-black text-xl">
               Start tracking Now
             </Typography>

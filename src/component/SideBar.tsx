@@ -1,13 +1,15 @@
 import { Typography, Box } from "@mui/material";
 import AppNav from "./AppNav";
-import { Outlet } from "react-router-dom";
+import { Outlet,Link } from "react-router-dom";
 const SideBar = () => {
   return (
     <Box className="bg-[#36454F] min-h-screen pt-[100px] flex flex-col justify-between items-center w-[50%]">
       <Box>
+        <Link to="/">
         <Typography variant="h3" className="text-white">
           World Wise
         </Typography>
+        </Link>
         <AppNav />
         {/* <Typography>list of Cities</Typography> */}
         <Outlet />
