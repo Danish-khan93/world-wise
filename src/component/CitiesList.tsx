@@ -1,6 +1,8 @@
 import { Skeleton } from "@mui/material";
 import CityItem from "./CityItem";
 import Message from "./Message";
+import { useCities } from "../context/CitiesContext";
+
 type CITY = {
   cityName: string;
   country: string;
@@ -12,13 +14,11 @@ type CITY = {
   id: number;
 };
 
-const CitiesList = ({
-  cities,
-  isLoading,
-}: {
-  cities: any;
-  isLoading: boolean;
-}) => {
+
+const CitiesList = () => {
+// @ts-ignore
+const {cities,isLoading} =useCities()
+
   const List = cities.map((city: CITY) => {
     return <CityItem city={city} key={city.id} />;
   });

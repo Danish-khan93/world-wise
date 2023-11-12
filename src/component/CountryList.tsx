@@ -1,6 +1,7 @@
 import { Skeleton } from "@mui/material";
 import CountryItem from "./CountryItem";
 import Message from "./Message";
+import { useCities } from "../context/CitiesContext";
 type CITY = {
   cityName: string;
   country: string;
@@ -12,14 +13,9 @@ type CITY = {
   id: number;
 };
 
-const CountryList = ({
-  cities,
-  isLoading,
-}: {
-  cities: any;
-  isLoading: boolean;
-}) => {
-  
+const CountryList = () => {
+  // @ts-ignore
+  const {cities,isLoading} = useCities()
   const List2 = cities.reduce((arr:CITY[],city:CITY)=> {
     if(!arr.map((el:CITY)=>el.country).includes(city.country))
     return [...arr,{country:city.country}];
