@@ -1,32 +1,50 @@
-import { Box, Button } from "@mui/material";
-import { useSearchParams, useNavigate } from "react-router-dom";
+import { Box } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import "leaflet/dist/leaflet.css";
+import { useCities } from "../context/CitiesContext";
+
+import { useState } from "react";
 const Map = () => {
-  const [seachParams, setSearchParams] = useSearchParams();
-
+  // @ts-ignore
+  const [mapPosition, setMapPosition] = useState([40, 0]);
+  const { cities } = useCities();
   const navigate = useNavigate();
-
-  const lat = seachParams.get("lat");
-  const lng = seachParams.get("lng");
   return (
     <Box
-      className="bg-red-400 w-[50%]"
+      className="bg-[#202020] w-[50%] h-screen"
       onClick={() => {
         navigate("form");
       }}
     >
-      map
-      <h1>
-        position : lat:{lat}
-        lng:{lng}
-      </h1>
-      <Button
-        onClick={() => {
-          // @ts-ignore
-          setSearchParams({ lat: 39, lng: 40 });
-        }}
+      <MapContainer
+        className="h-[100%]"
+        // @ts-ignore
+        center={mapPosition}
+        zoom={13}
+        scrollWheelZoom={true}
       >
-        change Position{" "}
-      </Button>
+        <TileLayer
+          // @ts-ignore
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          url="https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png"
+        />
+        {
+          // @ts-ignore
+          cities.map((value) => {
+            return (
+              <Marker
+                position={[value?.position?.lat, value?.position?.lng]}
+                key={value.id}
+              >
+                <Popup>
+                  A pretty CSS3 popup. <br /> Easily customizable.
+                </Popup>
+              </Marker>
+            );
+          })
+        }
+      </MapContainer>
     </Box>
   );
 };
